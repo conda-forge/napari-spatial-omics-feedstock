@@ -6,24 +6,24 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/napari-spatial-omics-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/napari-spatial-omics-{{ version }}.tar.gz
   sha256: 444357d7d38fb4b6ce7383fd0eeb363ab2b6b95d2ec425a00674e60a7ac5ad06
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.7
+    - python {{ python_min }}
   run:
     - napari
     - napari-plugin-engine >=0.1.4
     - numpy
     - pandas
-    - python >=3.7
+    - python >={{ python_min }}
 
 test:
   imports:
@@ -33,6 +33,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/sebgoti/napari-spatial-omics
